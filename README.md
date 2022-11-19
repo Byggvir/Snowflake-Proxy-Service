@@ -11,23 +11,22 @@ Perfore the following steps to install the start an stop of the [Snowflake](http
 
 I assume that you installed snowflake in *~/git/snowflake* and downloaded this repository to *~/git/Snowflake-Proxy-Service*.
 
-    
-    sudo addgroup --system snowflake
-    sudo adduser --system --ingroup snowflake snowflake
-    
-    sudo mkdir /var/log/snowflake
-    sudo chown snowflake:snowflake  /var/log/snowflake
-    
-    sudo cp $HOME/git/snowflake/proxy/proxy /usr/local/bin/snowflake-proxy
-    sudo chmod +x /usr/local/bin/snowflake-proxy
-    
-    # Go to the downloaded git
-    cd ~/git/Snowflake-Proxy-Service
+````
+cd ~/git/Snowflake-Proxy-Service
 
-    sudo cp snowflake-proxy.service /etc/systemd/system/
-    sudo systemctl enable snowflake-proxy.service
-    sudo systemctl start snowflake-proxy.service
+sudo addgroup --system snowflake
+sudo adduser --system --ingroup snowflake snowflake
+    
+sudo mkdir /var/log/snowflake
+sudo chown snowflake:snowflake  /var/log/snowflake
+    
+sudo cp ~/git/snowflake/proxy/proxy /usr/local/bin/snowflake-proxy
+sudo chmod +x /usr/local/bin/snowflake-proxy
+sudo cp snowflake-proxy.service /etc/systemd/system/
+sudo systemctl enable snowflake-proxy.service
+sudo systemctl start snowflake-proxy.service
+````
 
-Change the paths to your needs and don#t forget to change them in the file s*nowflake-proxy.service*.$
+Change the paths to your needs and don't forget to change them in the file *snowflake-proxy.service*.
 
 

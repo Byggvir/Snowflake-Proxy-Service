@@ -1,17 +1,18 @@
 #!/bin/bash
 
-addgroup --system snowflake
-adduser --system --ingroup snowflake snowflake
-    
-mkdir /var/log/snowflake
-chown snowflake:snowflake  /var/log/snowflake
-    
-cp $HOME/git/snowflake/proxy/proxy /usr/local/bin/snowflake-proxy
-chmod +x /usr/local/bin/snowflake-proxy
-    
-# Go to the downloaded git
 cd ~/git/Snowflake-Proxy-Service
 
-cp snowflake-proxy.service /etc/systemd/system/
-systemctl enable snowflake-proxy.service
-systemctl start snowflake-proxy.service
+sudo addgroup --system snowflake
+sudo adduser --system --ingroup snowflake snowflake
+    
+sudo mkdir /var/log/snowflake
+sudo chown snowflake:snowflake  /var/log/snowflake
+    
+sudo cp ~/git/snowflake/proxy/proxy /usr/local/bin/snowflake-proxy
+sudo chmod +x /usr/local/bin/snowflake-proxy
+    
+# Go to the downloaded git
+
+sudo cp snowflake-proxy.service /etc/systemd/system/
+sudo systemctl enable snowflake-proxy.service
+sudo systemctl start snowflake-proxy.service
