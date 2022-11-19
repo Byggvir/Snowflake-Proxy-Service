@@ -7,7 +7,7 @@ The systemd service script is based on a idea from [MBruchard](https://gist.gith
 
 ## Installation
 
-Perfore the following steps to install the start an stop of the [Snowflake](https://git.torproject.org/pluggable-transports/snowflake.git) proxy as a service.
+Execute the following steps on the command line to install [Snowflake](https://git.torproject.org/pluggable-transports/snowflake.git) proxy as a service on Debian.
 
 I assume that you installed snowflake in *~/git/snowflake* and downloaded this repository to *~/git/Snowflake-Proxy-Service*.
 
