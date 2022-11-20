@@ -44,6 +44,7 @@ snowlog <- RunSQL (SQL)
 
 snowlog %>% ggplot(
     aes( x = Zeit ) ) +
+    geom_line(aes( y = Connections ) ) +
     geom_point(aes( y = Connections ) ) +
     scale_x_datetime() +
     scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
@@ -81,28 +82,6 @@ snowlog %>% ggplot(
 
 ggsave("png/UpDownLoad.png"
        , plot = pp2
-       , device = "png"
-       , bg = "white"
-       , width = 1920
-       , height = 1080
-       , units = "px"
-       , dpi = 144
-)
-
-snowlog %>% ggplot(
-  aes( x = Zeit ) ) +
-  geom_point(aes( y = Upload ) ) +
-  scale_x_datetime() +
-  scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
-  theme_ipsum() +
-  labs(  title = "Snowflake upload"
-         , subtitle= paste("Stand:", heute)
-         , x = "Zeit"
-         , y = "KB"
-         , caption = citation ) -> pp3
-
-ggsave("png/Upload.png"
-       , plot = pp3
        , device = "png"
        , bg = "white"
        , width = 1920
