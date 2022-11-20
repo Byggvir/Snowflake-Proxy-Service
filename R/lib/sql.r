@@ -3,12 +3,12 @@ library(RMariaDB)
 library(data.table)
 
 RunSQL <- function (
-    SQL = 'select * from Faelle;'
+    SQL = 'select * from Connections;'
     , prepare="set @i := 1;") {
   
   rmariadb.settingsfile <- path.expand('~/R/sql.conf.d/Snowflake.conf')
   
-  rmariadb.db <- "DESTATIS"
+  rmariadb.db <- "Snowflake"
   
   DB <- dbConnect(
     RMariaDB::MariaDB()
@@ -35,7 +35,7 @@ ExecSQL <- function (
   
   rmariadb.settingsfile <- path.expand('~/R/sql.conf.d/Snowflake.conf')
   
-  rmariadb.db <- "DESTATIS"
+  rmariadb.db <- "Snowflake"
   
   DB <- dbConnect(
     RMariaDB::MariaDB()
