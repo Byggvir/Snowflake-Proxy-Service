@@ -4,7 +4,7 @@
 # or use parameter 1
 
 SNOWFLAKELOG=/var/log/snowflake/proxy.log
-if [ -n "" ] ; then
+if [ -n "$1" ] ; then
     "$SNOWFLAKELOG"=$1
 fi
 
