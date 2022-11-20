@@ -10,4 +10,5 @@ fi
 
 cat "${SNOWFLAKELOG}" \
 | grep connections \
-| sed -f sed/log.sed
+| sed -f sed/log.sed \
+| sed 's#^#'$HOSTNAME';#'
