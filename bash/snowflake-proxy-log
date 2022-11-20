@@ -5,7 +5,7 @@
 
 SNOWFLAKELOG=/var/log/snowflake/proxy.log
 if [ -n "$1" ] ; then
-    "$SNOWFLAKELOG"=$1
+    SNOWFLAKELOG=$1
 fi
 
 cat "${SNOWFLAKELOG}" \
