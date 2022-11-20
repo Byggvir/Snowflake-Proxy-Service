@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Change path and name to your snowflake log
+# or use parameter 1
+
+SNOWFLAKELOG=/var/log/snowflake/snowflake.log
+if [ -n "" ] then
+    "$SNOWFLAKELOG"=$1
+fi
+
+cat "${SNOWFLAKELOG}" \
+| grep connections \
+| sed -f sed/log.sed

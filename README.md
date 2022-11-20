@@ -29,4 +29,8 @@ sudo systemctl start snowflake-proxy.service
 
 Change the paths to your needs and don't forget to change them in the file *snowflake-proxy.service*.
 
+## Evaluate snowfalke proxy log
+
+The script *bash/snowflake-proxy-log* extracts the connection reports form a log file and writes the reports into a CSV file. The fields are seperated by ';'.
+
 
