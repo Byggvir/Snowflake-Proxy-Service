@@ -1,6 +1,6 @@
 use Snowflake;
 
-drop table if exists Snowflake;
+# drop table if exists Snowflake;
 
 create table if not exists `Snowflake` (
   `Host` CHAR(255),

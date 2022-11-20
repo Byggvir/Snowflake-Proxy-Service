@@ -44,15 +44,17 @@ snowlog <- RunSQL (SQL)
 
 snowlog %>% ggplot(
     aes( x = Zeit ) ) +
-    geom_line(aes( y = Connections ) ) +
-    geom_point(aes( y = Connections ) ) +
+    geom_line(aes( y = Connections , colour = Host) ) +
+    geom_point(aes( y = Connections, colour = Host ) ) +
     scale_x_datetime() +
     scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
+
     theme_ipsum() +
     labs(  title = "Snowflake connections"
            , subtitle= paste("Stand:", heute)
            , x = "Zeit"
            , y = "Anzahl"
+           , coulour = 'Proxy'
            , caption = citation ) -> pp1
 
 ggsave("png/Connections.png"
@@ -67,8 +69,8 @@ ggsave("png/Connections.png"
 
 snowlog %>% ggplot(
   aes( x = Zeit ) ) +
-  geom_line(aes( y = Download, colour = 'Download' ) ) +
-  geom_line(aes( y = Upload, colour = 'Upload' ) ) +
+  geom_line(aes( y = Download , colour = Host) ) +
+  geom_point(aes( y = Download , colour = Host ) ) +
   scale_x_datetime() +
   scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
   theme_ipsum() +
@@ -80,8 +82,60 @@ snowlog %>% ggplot(
          , caption = citation 
          ) -> pp2
 
-ggsave("png/UpDownLoad.png"
+ggsave("png/DownLoad.png"
        , plot = pp2
+       , device = "png"
+       , bg = "white"
+       , width = 1920
+       , height = 1080
+       , units = "px"
+       , dpi = 144
+)
+
+snowlog %>% ggplot(
+  aes( x = Zeit ) ) +
+  geom_line(aes( y = Upload , colour = Host) ) +
+  geom_point(aes( y = Upload , colour = Host ) ) +
+  scale_x_datetime() +
+  scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
+  theme_ipsum() +
+  labs(  title = "Snowflake upload"
+         , subtitle= paste("Stand:", heute)
+         , x = "Zeit"
+         , y = "KB"
+         , colour = 'Up-/Download'
+         , caption = citation 
+  ) -> pp2
+
+
+ggsave("png/Upload.png"
+       , plot = pp2
+       , device = "png"
+       , bg = "white"
+       , width = 1920
+       , height = 1080
+       , units = "px"
+       , dpi = 144
+)
+
+snowlog %>% ggplot(
+  aes( x = Upload, y = Download ) ) +
+  geom_point( aes( colour = Host ) ) +
+  geom_smooth( aes( colour = Host ) ) +
+  scale_x_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
+  scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
+  theme_ipsum() +
+  labs(  title = "Snowflake upload"
+         , subtitle= paste("Stand:", heute)
+         , x = "Upload [KB]"
+         , y = "Download [KB]"
+         , colour = 'Host'
+         , caption = citation 
+  ) -> pp4
+
+
+ggsave("png/UpDown.png"
+       , plot = pp4
        , device = "png"
        , bg = "white"
        , width = 1920
