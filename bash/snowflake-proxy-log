@@ -3,7 +3,7 @@
 # Change path and name to your snowflake log
 # or use parameter 1
 
-SNOWFLAKELOG=/var/log/snowflake/snowflake.log
+SNOWFLAKELOG=/var/log/snowflake/proxy.log
 if [ -n "" ] then
     "$SNOWFLAKELOG"=$1
 fi
