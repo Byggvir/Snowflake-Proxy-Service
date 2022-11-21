@@ -15,5 +15,5 @@ fi
 cat "${SNOWFLAKELOG}" \
 | grep connections \
 | sed -f "${SED}/log.sed" \
-| awk -F ';' -f "${AWK}/log.awk \
+| awk -F ';' -f "${AWK}/log.awk" \
 | sed 's#^#'$HOSTNAME';#'
