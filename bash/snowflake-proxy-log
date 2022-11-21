@@ -3,6 +3,10 @@
 # Change path and name to your snowflake log
 # or use parameter 1
 
+DIR=$(dirname $0)
+SED=${DIR}/sed
+AWK=${DIR}/awk
+
 SNOWFLAKELOG=/var/log/snowflake/proxy.log
 if [ -n "$1" ] ; then
     SNOWFLAKELOG=$1
@@ -10,6 +14,6 @@ fi
 
 cat "${SNOWFLAKELOG}" \
 | grep connections \
-| sed -f sed/log.sed \
-| awk -F ';' -f awk/log.awk \
+| sed -f "${SED}/log.sed" \
+| awk -F ';' -f "${AWK}/log.awk \
 | sed 's#^#'$HOSTNAME';#'
