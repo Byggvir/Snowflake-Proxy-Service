@@ -1,10 +1,4 @@
-# Convert log connections log entries into cvs
+# Convert connection log entries into CSV
 
-s# #_#;
-s# .*were #;#;
-s# #;#;
-s#conn.*↑ ##;
-s# .* ↓ #;#;
-s# .*##;
-s#/#-#g;
-s#_# #;
+s#\([0-9]\{4\}/[0-9]\{2\}/[0-9]\{2\} [0-9]\{2\}:[0-9]\{2\}:[0-9]\{2\}\).*were \([0-9]\+\) conn.*↑ \([0-9]\+ [KMG]*B\).*↓ \([0-9]\+ [KMG]*B\).*#\1;\2;\3;\4#;
+s# \([KMG]B\)#;\1#g;
