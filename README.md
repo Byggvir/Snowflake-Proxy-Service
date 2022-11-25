@@ -32,5 +32,10 @@ Change the paths to your needs and don't forget to change them in the file *snow
 ## Evaluate snowfalke proxy log
 
 The script *bash/snowflake-proxy-log* extracts the connection reports form a log file and writes the reports into a CSV file. The fields are seperated by ';'.
+It can be imported into a MariaDB / MySQLDB with the *SQL/import.sql*.
 
+## R
 
+The R-Script *evauate-logs.r* draws some diagrams for connections, download and upload.
+
+tbc
