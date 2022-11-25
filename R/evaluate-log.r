@@ -42,6 +42,9 @@ citation <- paste("© 2022 by Thomas Arend\nStand:", heute )
 SQL <- 'select * from Snowflake;'
 snowlog <- RunSQL (SQL)
 
+Hosts <- sort(unique(snowlog$Host))
+snowlog$Host <- factor (snowlog$Host, levels = Hosts, labels = paste("Pi",1:length(Hosts)))
+
 snowlog %>% ggplot(
     aes( x = Zeit ) ) +
     geom_line(aes( y = Connections , colour = Host) ) +
@@ -67,10 +70,13 @@ ggsave("png/Connections.png"
        , dpi = 144
 )
 
-snowlog %>% ggplot(
+m <- mean(snowlog$Download)
+s <- sd(snowlog$Download)
+  
+snowlog %>% filter( Download < m + 4 * s ) %>% ggplot(
   aes( x = Zeit ) ) +
-  geom_line(aes( y = Download , colour = Host) ) +
-  geom_point(aes( y = Download , colour = Host ) ) +
+  geom_line(aes( y = Download / 1024, colour = Host) ) +
+  geom_point(aes( y = Download / 1024, colour = Host ) ) +
   scale_x_datetime() +
   scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
   theme_ipsum() +
@@ -78,7 +84,7 @@ snowlog %>% ggplot(
          , subtitle= paste("Stand:", heute)
          , x = "Zeit"
          , y = "KB"
-         , colour = 'Up-/Download'
+         , colour = 'Host'
          , caption = citation 
          ) -> pp2
 
@@ -94,8 +100,8 @@ ggsave("png/DownLoad.png"
 
 snowlog %>% ggplot(
   aes( x = Zeit ) ) +
-  geom_line(aes( y = Upload , colour = Host) ) +
-  geom_point(aes( y = Upload , colour = Host ) ) +
+  geom_line(aes( y = Upload / 1024 , colour = Host) ) +
+  geom_point(aes( y = Upload / 1024 , colour = Host ) ) +
   scale_x_datetime() +
   scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
   theme_ipsum() +
@@ -103,7 +109,7 @@ snowlog %>% ggplot(
          , subtitle= paste("Stand:", heute)
          , x = "Zeit"
          , y = "KB"
-         , colour = 'Up-/Download'
+         , colour = 'Host'
          , caption = citation 
   ) -> pp2
 
@@ -119,13 +125,14 @@ ggsave("png/Upload.png"
 )
 
 snowlog %>% ggplot(
-  aes( x = Upload, y = Download ) ) +
+  aes( x = Upload / 1024, y = Download / 1024 ) ) +
   geom_point( aes( colour = Host ) ) +
   geom_smooth( aes( colour = Host ) ) +
+#  coord_trans(y = 'log2') +
   scale_x_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
   scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
   theme_ipsum() +
-  labs(  title = "Snowflake upload"
+  labs(  title = "Snowflake uplaod / download"
          , subtitle= paste("Stand:", heute)
          , x = "Upload [KB]"
          , y = "Download [KB]"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PILIST=(pi1 e1)
+
+rm /tmp/snowflake.csv
+
+for ((i=0;i<2;i++))
+do  
+
+    ssh ${PILIST[$i]} 'sudo git/Snowflake-Proxy-Service/bash/snowflake-proxy-log' >> /tmp/snowflake.csv
+
+done
