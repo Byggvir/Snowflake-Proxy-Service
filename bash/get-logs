@@ -1,12 +1,14 @@
 #!/bin/bash
 
-PILIST=(pi1 e1)
+PILIST=(pi1 e1 by)
 
 rm /tmp/snowflake.csv
 
-for ((i=0;i<2;i++))
+for ((i=0;i<${#PILIST[@]};i++))
 do  
-
+    
+    echo "--${PILIST[$i]}--"
+    
     ssh ${PILIST[$i]} 'sudo git/Snowflake-Proxy-Service/bash/snowflake-proxy-log' >> /tmp/snowflake.csv
 
 done
