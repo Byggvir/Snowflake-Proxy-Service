@@ -43,7 +43,7 @@ SQL <- 'select * from Snowflake;'
 snowlog <- RunSQL (SQL)
 
 Hosts <- sort(unique(snowlog$Host))
-snowlog$Host <- factor (snowlog$Host, levels = Hosts, labels = paste("Pi",1:length(Hosts)))
+snowlog$Host <- factor (snowlog$Host, levels = Hosts, labels = paste("Host",1:length(Hosts)))
 
 snowlog %>% ggplot(
     aes( x = Zeit ) ) +
