@@ -7,7 +7,7 @@ StartLimitBurst=10
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/snowflake-proxy -verbose -log /var/log/snowflake/snowflake.log
+ExecStart=/usr/local/bin/snowflake-proxy -verbose -log /var/log/snowflake/proxy.log
 Restart=on-failure
 RestartSec=60
 KillMode=process
