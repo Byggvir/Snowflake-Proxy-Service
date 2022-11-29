@@ -150,3 +150,32 @@ ggsave("png/UpDown.png"
        , units = "px"
        , dpi = 144
 )
+
+for (H in unique(snowlog$Host)) {
+  
+  snowlog %>% filter( Host == H ) %>% ggplot(
+    aes( x = Zeit ) ) +
+    geom_line(aes( y = Connections ) ) +
+    geom_point(aes( y = Connections ) ) +
+    scale_x_datetime() +
+    scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
+    
+    theme_ipsum() +
+    labs(  title = paste("Snowflake connections Host", H)
+           , subtitle= paste("Stand:", heute)
+           , x = "Zeit"
+           , y = "Anzahl"
+           , coulour = 'Proxy'
+           , caption = citation ) -> pp1
+  
+  ggsave(  paste ( 'png/Connections-', H, '.png', sep = '' )
+         , plot = pp1
+         , device = "png"
+         , bg = "white"
+         , width = 1920
+         , height = 1080
+         , units = "px"
+         , dpi = 144
+  )
+  
+}
