@@ -161,7 +161,7 @@ for (H in unique(snowlog$Host)) {
     scale_y_continuous(labels=function(x) format(x, big.mark = ".", decimal.mark= ',', scientific = FALSE)) +
     
     theme_ipsum() +
-    labs(  title = paste("Snowflake connections Host", H)
+    labs(  title = paste("Snowflake connections", H)
            , subtitle= paste("Stand:", heute)
            , x = "Zeit"
            , y = "Anzahl"
